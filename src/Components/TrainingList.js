@@ -49,7 +49,8 @@ class TrainingList extends Component{
 
         return(
             <div>
-                 <ReactTable 
+                <h3>All Trainings</h3>
+                <ReactTable 
                     data={this.state.trainings}
                     columns={trainingColumns}
                     filterable

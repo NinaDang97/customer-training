@@ -9,7 +9,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 class App extends Component {
-  state = {activeItem: 'Home'}
+  state = {activeItem: ''}
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 

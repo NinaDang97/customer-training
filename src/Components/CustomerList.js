@@ -72,6 +72,7 @@ class CustomerList extends Component{
         ]
         return(
             <div>
+                <h3>Customers</h3>
                 <ReactTable 
                     data={this.state.customers}
                     columns={customerColumns}
