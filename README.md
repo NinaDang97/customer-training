@@ -1,7 +1,7 @@
 # customer-training-program
 
 ### Overview:
-Personal Trainer company needs front end to their customer database. Database contains info about customers and their trainings. They have [REST API](https://haagahelia-my.sharepoint.com/:b:/g/personal/h01270_haaga-helia_fi/EZoZfgW0l5lDlQ4t4RCAvSwBNzlBMzdnE6AB-2HWBtAZnA?e=ZFXrIs) and documentation which contains all information needed for front end development. 
+Personal Trainer company needs front end to their customer database. Database contains info about customers and their trainings. They have [REST API](https://customerrest.herokuapp.com/api) and documentation which contains all information needed for front end development. 
 
 ### Demo Version:
 
