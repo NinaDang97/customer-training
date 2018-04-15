@@ -62,6 +62,7 @@ class CustomerList extends Component{
                 accessor: 'phone'
             },
             {
+                Header: 'Program',
                 id: 'button',
                 accessor: 'links[2].href',
                 filterable: false,

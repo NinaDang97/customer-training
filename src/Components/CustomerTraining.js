@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import SkyLight from 'react-skylight';
+import { Button } from 'semantic-ui-react';
 
 class CustomerTraining extends Component{
     constructor(props){
         super(props);
         this.state = {
-            trainings: []
+            trainings: [],
+            totalTraining: 0
         }
     }
 
@@ -14,9 +16,20 @@ class CustomerTraining extends Component{
             method: 'GET'
         })
         .then(res => res.json())
-        .then(data => this.setState({
-            trainings: data.content
-        }))
+        .then(data => {
+            this.setState({
+                trainings: data.content
+            });
+            const {trainings} = this.state;
+            for(let i = 0; i < trainings.length; i++){
+                if(trainings[i].date !== undefined){
+                    this.setState({
+                        totalTraining: trainings.length
+                    })
+                }
+            }
+        })
+        .catch(err => console.log('Error fetching in CustomerTraining.js: ' + console.log(err)));
     }
 
     render(){
@@ -30,14 +43,18 @@ class CustomerTraining extends Component{
         return(
             <div>
                 <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title="Registered Training Program">
-                    {/* <button onClick={()=>console.log(this.props.link)}>Show</button> */}
-                    {/* {this.props.link} */}
                     <ol>
                         {training}
                     </ol>
                 </SkyLight>
 
-                <button onClick={() => this.simpleDialog.show()}>Details</button>
+                {/* <button onClick={() => this.simpleDialog.show()}>Details</button> */}
+                <Button 
+                    inverted color='facebook'
+                    onClick={() => this.simpleDialog.show()}
+                >
+                    {this.state.totalTraining}
+                </Button>
             </div>
         );
     }
