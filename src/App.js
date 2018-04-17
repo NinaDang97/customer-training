@@ -25,7 +25,7 @@ class App extends Component {
         <div className="container">
           <BrowserRouter>
             <Grid>
-              <Grid.Column width={3}>
+              <Grid.Column width={2}>
                 <Menu fluid vertical tabular>
                   <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
                   <Menu.Item as={Link} to='/customers' name='Customers' active={activeItem === 'Customers'} onClick={this.handleItemClick} />
@@ -33,7 +33,7 @@ class App extends Component {
                 </Menu>
               </Grid.Column>
 
-              <Grid.Column stretched width={13}>
+              <Grid.Column stretched width={14}>
                 <Segment>
                     <Route path='/' component={Home} />
                     <Route path='/customers' component={CustomerList} />

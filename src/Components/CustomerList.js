@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import CustomerTraining from './CustomerTraining';
+import AddCustomer from './AddCustomer';
+import { Button } from 'semantic-ui-react';
 
 class CustomerList extends Component{
     constructor(props){
@@ -25,6 +27,25 @@ class CustomerList extends Component{
         }))
         .catch(err => console.log("loadCustomers Error: " + console.log(err)))
     }
+
+    addCus = (newCus) => {
+        fetch('https://customerrest.herokuapp.com/api/customers', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newCus)
+        })
+        .then(res => this.loadCustomers())
+        .catch(err => console.log('addCus Error: ' + err))
+        console.log(newCus);
+    }
+
+    // deleteCus = (link) => {
+    //     fetch(link, {
+    //         method: 'DELETE',
+    //     })
+    //     .catch(res => this.loadCustomers())
+    //     .then(err => console.log('deleteCus Error: ' + err))
+    // }
 
     render(){
         const customerColumns = [
@@ -62,18 +83,27 @@ class CustomerList extends Component{
                 accessor: 'phone'
             },
             {
-                Header: 'Program',
+                Header: 'Registered',
                 id: 'button',
                 accessor: 'links[2].href',
                 filterable: false,
                 sortable: false,
                 width: 100,
                 Cell: ({value}) => <CustomerTraining link={value} />
-            }
+            },
+            // {
+            //     id: 'button',
+            //     accessor: 'links[0].href',
+            //     filterable: false,
+            //     sortable: false,
+            //     width: 50,
+            //     Cell: ({value}) =>  <Button circular icon='settings' />
+            // }
         ]
         return(
             <div>
                 <h3>Customers</h3>
+                <AddCustomer addCus={this.addCus} />
                 <ReactTable 
                     data={this.state.customers}
                     columns={customerColumns}
