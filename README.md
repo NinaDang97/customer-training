@@ -14,8 +14,10 @@ npm start
 
 ### 3rd party react libraries:
 1. semantic-ui-react
-2. react-router-dom
-3. react-skylight
+2. react-confirm-alert
+3. react-router-dom
+4. react-skylight
+5. react-toastify
 
 ### Folder structure:
 ```
