@@ -4,6 +4,8 @@ import 'react-table/react-table.css';
 import CustomerTraining from './CustomerTraining';
 import AddCustomer from './AddCustomer';
 import { Button } from 'semantic-ui-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class CustomerList extends Component{
     constructor(props){
@@ -34,18 +36,34 @@ class CustomerList extends Component{
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newCus)
         })
-        .then(res => this.loadCustomers())
+        .then(res => {
+            this.loadCustomers();
+            //add noti after added cus
+            toast.success("New customer added successfully!", {
+                position: toast.POSITION.TOP_CENTER
+            });
+        })
         .catch(err => console.log('addCus Error: ' + err))
-        console.log(newCus);
     }
 
-    // deleteCus = (link) => {
-    //     fetch(link, {
-    //         method: 'DELETE',
-    //     })
-    //     .catch(res => this.loadCustomers())
-    //     .then(err => console.log('deleteCus Error: ' + err))
-    // }
+    deleteCus = (link) => {
+        fetch(link, {
+            method: 'DELETE',
+        })
+        .then(res => { 
+            this.loadCustomers();
+            //add noti after deleted
+            toast.success("Delete succeeded!", {
+                position: toast.POSITION.TOP_CENTER
+            });
+        })
+        .catch(err => {
+            console.log('deleteCus Error: ' + err);
+            toast.error("Sorry, there is something wrong when delete customer.", {
+                position: toast.POSITION.TOP_CENTER
+            });
+        })
+    }
 
     render(){
         const customerColumns = [
@@ -84,21 +102,21 @@ class CustomerList extends Component{
             },
             {
                 Header: 'Registered',
-                id: 'button',
+                id: 'registered',
                 accessor: 'links[2].href',
                 filterable: false,
                 sortable: false,
                 width: 100,
                 Cell: ({value}) => <CustomerTraining link={value} />
             },
-            // {
-            //     id: 'button',
-            //     accessor: 'links[0].href',
-            //     filterable: false,
-            //     sortable: false,
-            //     width: 50,
-            //     Cell: ({value}) =>  <Button circular icon='settings' />
-            // }
+            {
+                id: 'button',
+                accessor: 'links[0].href',
+                filterable: false,
+                sortable: false,
+                width: 50,
+                Cell: ({value}) =>  <Button circular icon='trash' onClick={() => this.deleteCus(value)} />
+            }
         ]
         return(
             <div>
@@ -112,6 +130,7 @@ class CustomerList extends Component{
                     defaultPageSize={10}
                     className="-striped -highlight"
                 />
+                <ToastContainer />
             </div>
         );
     }
