@@ -27,6 +27,7 @@ public/
 	manifest.json
 src/
 	Components/
+		AddCustomer.js
 		CustomerList.js
 		CustomerTraining.js
 		Home.js
