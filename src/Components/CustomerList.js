@@ -4,6 +4,8 @@ import 'react-table/react-table.css';
 import CustomerTraining from './CustomerTraining';
 import AddCustomer from './AddCustomer';
 import { Button } from 'semantic-ui-react';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -47,21 +49,35 @@ class CustomerList extends Component{
     }
 
     deleteCus = (link) => {
-        fetch(link, {
-            method: 'DELETE',
-        })
-        .then(res => { 
-            this.loadCustomers();
-            //add noti after deleted
-            toast.success("Delete succeeded!", {
-                position: toast.POSITION.TOP_CENTER
-            });
-        })
-        .catch(err => {
-            console.log('deleteCus Error: ' + err);
-            toast.error("Sorry, there is something wrong when delete customer.", {
-                position: toast.POSITION.TOP_CENTER
-            });
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure to delete this customer?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        fetch(link, {
+                            method: 'DELETE',
+                        })
+                        .then(res => { 
+                            this.loadCustomers();
+                            //add noti after deleted
+                            toast.success("Delete succeeded!", {
+                                position: toast.POSITION.TOP_CENTER
+                            });
+                        })
+                        .catch(err => {
+                            console.log('deleteCus Error: ' + err);
+                            toast.error("Sorry, there is something wrong when delete customer.", {
+                                position: toast.POSITION.TOP_CENTER
+                            });
+                        })
+                    }
+                },
+                {
+                    label: 'No'
+                }
+            ]
         })
     }
 

@@ -17,17 +17,28 @@ class CustomerTraining extends Component{
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({
-                trainings: data.content
-            });
-            const {trainings} = this.state;
-            for(let i = 0; i < trainings.length; i++){
-                if(trainings[i].date !== undefined){
+            data = data.content;
+            for(let i = 0; i < data.length; i++){
+                let trainingObj = {}
+
+                if(data[i].activity === undefined){
+                    trainingObj = {};
+                } else{
+                    let date = new Date(data[i].date);
+                    date = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+                    trainingObj = {                        
+                        date: date,
+                        duration: data[i].duration,
+                        activity: data[i].activity
+                    }
                     this.setState({
-                        totalTraining: trainings.length
-                    })
+                        totalTraining: data.length
+                    });
                 }
-            }
+                
+                let trainings = [...this.state.trainings, trainingObj];
+                this.setState({trainings});
+            }    
         })
         .catch(err => console.log('Error fetching in CustomerTraining.js: ' + console.log(err)));
     }

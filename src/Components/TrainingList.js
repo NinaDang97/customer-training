@@ -15,13 +15,23 @@ class TrainingList extends Component{
     }
 
     loadTrainings = () => {
-        fetch('https://customerrest.herokuapp.com/api/trainings', {
+        fetch('https://customerrest.herokuapp.com/gettrainings', {
             method: 'GET'
         })
         .then(res => res.json())
-        .then(data => this.setState({
-            trainings: data.content
-        }))
+        .then(data => {
+            for(let i = 0; i < data.length; i++){
+                let date = new Date(data[i].date);
+                date = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+                let trainingObj = {
+                    date: date,
+                    duration: data[i].duration,
+                    activity: data[i].activity
+                }
+                let trainings = [...this.state.trainings, trainingObj];
+                this.setState({trainings});
+            }          
+        })
         .catch(err => console.log("loadTrainings Error: " + err))
     }
 
