@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EditCustomer from './EditCustomer';
 
 class CustomerList extends Component{
     constructor(props){
@@ -81,6 +82,22 @@ class CustomerList extends Component{
         })
     }
 
+    editCus = (link, cus) => {
+        fetch(link, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(cus)
+        })
+        .then(res => { 
+            this.loadCustomers();
+            //add noti after deleted
+            toast.success("Updated successfully!", {
+                position: toast.POSITION.TOP_CENTER
+            })
+        })
+        .catch(err => console.log('editCus Error: ', err))
+    }
+
     render(){
         const customerColumns = [
             {
@@ -126,7 +143,15 @@ class CustomerList extends Component{
                 Cell: ({value}) => <CustomerTraining link={value} />
             },
             {
-                id: 'button',
+                id: 'edit',
+                accessor: 'links[0].href',
+                filterable: false,
+                sortable: false,
+                width: 50,
+                Cell: ({row}) => < EditCustomer editCus={this.editCus} row={row} /> 
+            },
+            {
+                id: 'delete',
                 accessor: 'links[0].href',
                 filterable: false,
                 sortable: false,
