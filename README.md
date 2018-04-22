@@ -31,6 +31,7 @@ src/
 		AddTraining.js
 		CustomerList.js
 		CustomerTraining.js
+		EditCustomer.js
 		Home.js
 		TrainingList.js
 	App.css
