@@ -28,6 +28,7 @@ public/
 src/
 	Components/
 		AddCustomer.js
+		AddTraining.js
 		CustomerList.js
 		CustomerTraining.js
 		Home.js
