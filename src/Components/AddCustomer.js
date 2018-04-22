@@ -53,33 +53,49 @@ class AddCustomer extends Component{
                     <Form>
                         <Form.Field>
                             <label>First Name</label>
-                            <input name='firstname' value={this.state.firstname} onChange={this.handleChange} />
+                            <input 
+                            placeholder='First name'
+                            name='firstname' value={this.state.firstname} onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>
                             <label>Last Name</label>
-                            <input name='lastname' value={this.state.lastname} onChange={this.handleChange} />
+                            <input
+                            placeholder='Last name'
+                            name='lastname' value={this.state.lastname} onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>
                             <label>Street address</label>
-                            <input name='streetaddress' value={this.state.streetaddress} onChange={this.handleChange} />
+                            <input
+                            placeholder='Street address'
+                            name='streetaddress' value={this.state.streetaddress} onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>
                             <label>Postcode</label>
-                            <input name='postcode' value={this.state.postcode} onChange={this.handleChange} />
+                            <input
+                            placeholder='Post code'
+                            name='postcode' value={this.state.postcode} onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>
                             <label>City</label>
-                            <input name='city' value={this.state.city} onChange={this.handleChange} />
+                            <input
+                            placeholder='City'
+                            name='city' value={this.state.city} onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>
                             <label>Email</label>
-                            <input name='email' value={this.state.email} onChange={this.handleChange} />
+                            <input
+                            placeholder='Email'
+                            name='email' value={this.state.email} onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>
                             <label>Phone</label>
-                            <input name='phone' value={this.state.phone} onChange={this.handleChange} />
+                            <input name='phone'
+                            placeholder='Phone number'
+                            value={this.state.phone} onChange={this.handleChange} />
                         </Form.Field>
-                        <Button onClick={this.submitBtn}>
+                        <Button
+                            color='facebook' 
+                            onClick={this.submitBtn}>
                             Submit
                         </Button>
                     </Form>

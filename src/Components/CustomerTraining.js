@@ -24,12 +24,10 @@ class CustomerTraining extends Component{
                 if(data[i].activity === undefined){
                     trainingObj = {};
                 } else{
-                    let date = new Date(data[i].date);
-                    date = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-                    trainingObj = {                        
-                        date: date,
-                        duration: data[i].duration,
-                        activity: data[i].activity
+                    let date = new Date(data[i].date).toJSON().substr(0, 10);
+                    trainingObj = {
+                        ...data[i],                        
+                        date
                     }
                     this.setState({
                         totalTraining: data.length
