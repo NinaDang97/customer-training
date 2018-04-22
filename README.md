@@ -4,7 +4,8 @@
 Personal Trainer company needs front end to their customer database. Database contains info about customers and their trainings. They have [REST API](https://customerrest.herokuapp.com/api) and documentation which contains all information needed for front end development. 
 
 ### Demo Version:
-
+[demo v1](customer-training-task02.surge.sh)
+[demo final]()
 
 ### Install and Running App:
 ```
