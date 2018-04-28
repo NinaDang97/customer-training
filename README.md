@@ -18,7 +18,8 @@ npm start
 2. react-confirm-alert
 3. react-router-dom
 4. react-skylight
-5. react-toastify
+5. react-table
+6. react-toastify
 
 ### Folder structure:
 ```
