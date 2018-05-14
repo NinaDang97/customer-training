@@ -14,13 +14,14 @@ npm start
 ```
 
 ### 3rd party react libraries:
-0. semantic-ui-css
-1. semantic-ui-react
-2. react-confirm-alert
-3. react-router-dom
-4. react-skylight
-5. react-table
-6. react-toastify
+1. firebase
+2. semantic-ui-css
+3. semantic-ui-react
+4. react-confirm-alert
+5. react-router-dom
+6. react-skylight
+7. react-table
+8. react-toastify
 
 ### Folder structure:
 ```
