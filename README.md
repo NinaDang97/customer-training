@@ -14,6 +14,7 @@ npm start
 ```
 
 ### 3rd party react libraries:
+0. semantic-ui-css
 1. semantic-ui-react
 2. react-confirm-alert
 3. react-router-dom
