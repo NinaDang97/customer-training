@@ -62,7 +62,8 @@ class AddTraining extends Component{
                         <Form.Field>
                         <label>Duration</label>
                         <input 
-                            placeholder='Duration'       name='duration'
+                            placeholder='Duration'       
+                            name='duration'
                             value={this.state.duration}
                             onChange={this.handleInput}
                             />
@@ -73,7 +74,7 @@ class AddTraining extends Component{
                         <DatePicker
                             selected={this.state.date}
                             onChange={this.handleDate}
-                             />
+                         />
                         </Form.Field>
 
                          <Form.Field>

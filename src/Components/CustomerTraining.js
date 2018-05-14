@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import SkyLight from 'react-skylight';
 import { Button } from 'semantic-ui-react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 class CustomerTraining extends Component{
     constructor(props){
         super(props);
         this.state = {
             trainings: [],
-            totalTraining: 0
+            totalTraining: 0,
+            dates: []
         }
     }
 
@@ -30,7 +33,8 @@ class CustomerTraining extends Component{
                         date
                     }
                     this.setState({
-                        totalTraining: data.length
+                        totalTraining: data.length,
+                        dates: [...this.state.dates, moment(date)]
                     });
                 }
                 
@@ -42,6 +46,11 @@ class CustomerTraining extends Component{
     }
 
     render(){
+        const skylightStyle = {
+            width: '50%',
+            marginTop: '-300px',
+        };
+
         const training = this.state.trainings.map((val, i) => (
             <li key={i} style={{textAlign: 'left'}}>
                 <strong>{val.activity}</strong> <br />
@@ -51,10 +60,19 @@ class CustomerTraining extends Component{
         ));
         return(
             <div>
-                <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title="Registered Training Program">
+                <SkyLight 
+                    dialogStyles={skylightStyle}
+                    hideOnOverlayClicked ref={ref => this.simpleDialog = ref} 
+                    title="Registered Training Program">
                     <ol>
                         {training}
                     </ol>
+                    
+                    <h3>Your training calendar</h3>
+                    <DatePicker 
+                        inline
+                        highlightDates={this.state.dates}
+                    />
                 </SkyLight>
 
                 {/* <button onClick={() => this.simpleDialog.show()}>Details</button> */}

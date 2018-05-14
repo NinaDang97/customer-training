@@ -4,7 +4,8 @@ class Home extends Component {
     render(){
         return (
             <div>
-                <h1>Training Program</h1>
+                <h2>Welcome to Training Program</h2>
+                <p>You have logged in our training program.</p>
             </div>
         );
     }

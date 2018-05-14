@@ -1,20 +1,64 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Landing from './Components/Landing';
 import Home from './Components/Home';
+import SignUp from './Components/SignUp';
+import LogIn from './Components/LogIn';
 import TrainingList from './Components/TrainingList';
 import CustomerList from './Components/CustomerList';
+import SignOutBtn from './Components/SignOut';
 import { Grid, Menu, Segment } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import * as routes from './Constants/routes';
+import { firebase } from './Firebase';
 
 class App extends Component {
-  state = {activeItem: ''}
-
+  constructor(props){
+    super(props);
+    this.state = {
+      activeItem: 'Landing',
+      authUser: null
+    }
+  }
+  
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  componentDidMount(){
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+      ? this.setState({ authUser })
+      : this.setState({ authUser: null })
+    })
+  }
 
   render() {
     const { activeItem } = this.state;
+
+    const Navigation = ({ authUser }) => 
+      <div>
+        {
+          authUser
+          ? <NavigationAuth />
+          : <NavigationNonAuth />
+        }
+      </div>
+
+    const NavigationAuth = () => 
+        <div>
+          <Menu.Item as={Link} to={routes.HOME} name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
+          <Menu.Item as={Link} to={routes.CUSTOMERS} name='Customers' active={activeItem === 'Customers'} onClick={this.handleItemClick} />
+          <Menu.Item as={Link} to={routes.TRAININGS} name='All Trainings' active={activeItem === 'All Trainings'} onClick={this.handleItemClick} />
+          <SignOutBtn />
+        </div>
+
+    const NavigationNonAuth = () =>
+        <div>
+          <Menu.Item as={Link} to={routes.LANDING} name="Landing" active={activeItem === 'Landing'} onClick={this.handleItemClick} />
+          <Menu.Item as={Link} to={routes.LOG_IN} name="Login" active={activeItem === 'Login'} onClick={this.handleItemClick} />
+        </div>
+
     return (
       <div className="App">
         <header className="App-header">
@@ -27,17 +71,18 @@ class App extends Component {
             <Grid>
               <Grid.Column width={2}>
                 <Menu fluid vertical tabular>
-                  <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
-                  <Menu.Item as={Link} to='/customers' name='Customers' active={activeItem === 'Customers'} onClick={this.handleItemClick} />
-                  <Menu.Item as={Link} to='/trainings' name='All Trainings' active={activeItem === 'All Trainings'} onClick={this.handleItemClick} />
+                  <Navigation authUser={this.state.authUser} />
                 </Menu>
               </Grid.Column>
 
               <Grid.Column stretched width={14}>
                 <Segment>
-                    <Route path='/' component={Home} />
-                    <Route path='/customers' component={CustomerList} />
-                    <Route path='/trainings' component={TrainingList} />
+                    <Route exact path={routes.LANDING} component={() => <Landing />} />
+                    <Route exact path={routes.SIGN_UP} component={() => <SignUp />} />
+                    <Route exact path={routes.LOG_IN} component={() => <LogIn />} />
+                    <Route exact path={routes.HOME} component={() => <Home />} />
+                    <Route exact path={routes.CUSTOMERS} component={() => <CustomerList />} />
+                    <Route exact path={routes.TRAININGS} component={() => <TrainingList />} />
                 </Segment>
               </Grid.Column>
             </Grid>
