@@ -5,7 +5,7 @@ Personal Trainer company needs front end to their customer database. Database co
 
 ### Demo Version:
 [demo v1](https://customer-training-task02.surge.sh/) <br />
-[demo final]()
+[demo final](http://customer-training-final.surge.sh/)
 
 ### Install and Running App:
 ```
@@ -37,7 +37,17 @@ src/
 		CustomerTraining.js
 		EditCustomer.js
 		Home.js
+		Landing.js
+		LogIn.js
+		SignOut.js
+		SignUp.js
 		TrainingList.js
+	Constants/
+		routes.js
+	Firebase/
+		auth.js
+		firebase.js
+		index.js
 	App.css
 	App.js
 	App.test.js
