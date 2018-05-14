@@ -50,7 +50,7 @@ class App extends Component {
           <Menu.Item as={Link} to={routes.HOME} name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
           <Menu.Item as={Link} to={routes.CUSTOMERS} name='Customers' active={activeItem === 'Customers'} onClick={this.handleItemClick} />
           <Menu.Item as={Link} to={routes.TRAININGS} name='All Trainings' active={activeItem === 'All Trainings'} onClick={this.handleItemClick} />
-          <SignOutBtn />
+          <SignOutBtn  />
         </div>
 
     const NavigationNonAuth = () =>
@@ -58,6 +58,29 @@ class App extends Component {
           <Menu.Item as={Link} to={routes.LANDING} name="Landing" active={activeItem === 'Landing'} onClick={this.handleItemClick} />
           <Menu.Item as={Link} to={routes.LOG_IN} name="Login" active={activeItem === 'Login'} onClick={this.handleItemClick} />
         </div>
+
+    const Content = ({ authUser }) => 
+        <div>
+          {
+            authUser
+            ? <ContentAuth />
+            : <ContentNonAuth />
+          }
+        </div>
+
+    const ContentAuth = () => 
+        <div>
+          <Route exact path={routes.HOME} component={() => <Home />} />
+          <Route exact path={routes.CUSTOMERS} component={() => <CustomerList />} />
+          <Route exact path={routes.TRAININGS} component={() => <TrainingList />} />
+        </div>
+
+    const ContentNonAuth = () => 
+        <div>          
+          <Route exact path={routes.LANDING} component={() => <Landing />} />
+          <Route exact path={routes.LOG_IN} component={() => <LogIn />} />
+          <Route exact path={routes.SIGN_UP} component={() => <SignUp />} />
+        </div>     
 
     return (
       <div className="App">
@@ -77,12 +100,7 @@ class App extends Component {
 
               <Grid.Column stretched width={14}>
                 <Segment>
-                    <Route exact path={routes.LANDING} component={() => <Landing />} />
-                    <Route exact path={routes.SIGN_UP} component={() => <SignUp />} />
-                    <Route exact path={routes.LOG_IN} component={() => <LogIn />} />
-                    <Route exact path={routes.HOME} component={() => <Home />} />
-                    <Route exact path={routes.CUSTOMERS} component={() => <CustomerList />} />
-                    <Route exact path={routes.TRAININGS} component={() => <TrainingList />} />
+                  <Content authUser={this.state.authUser} />
                 </Segment>
               </Grid.Column>
             </Grid>
